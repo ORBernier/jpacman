@@ -1,7 +1,7 @@
 package nl.tudelft.jpacman.sprite;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import nl.tudelft.jpacman.PacmanConfigurationException;
@@ -82,7 +82,7 @@ public class PacManSprites extends SpriteStore {
      * @return The animated sprite facing the given direction.
      */
     private Map<Direction, Sprite> directionSprite(String resource, int frames) {
-        Map<Direction, Sprite> sprite = new HashMap<>();
+        LinkedHashMap<Direction, Sprite> sprite = new LinkedHashMap<>();
 
         Sprite baseImage = loadSprite(resource);
         for (int i = 0; i < DIRECTIONS.length; i++) {
@@ -105,7 +105,9 @@ public class PacManSprites extends SpriteStore {
      * @return The Sprite for the ghost.
      */
     public Map<Direction, Sprite> getGhostSprite(GhostColor color) {
-        assert color != null;
+        if(color == null){
+            throw new AssertionError();
+        }
 
         String resource = "/sprite/ghost_" + color.name().toLowerCase()
             + ".png";

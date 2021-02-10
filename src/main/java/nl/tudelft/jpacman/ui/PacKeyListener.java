@@ -21,13 +21,17 @@ class PacKeyListener implements KeyListener {
      * @param keyMappings The mappings of keyCode to action.
      */
     PacKeyListener(Map<Integer, Action> keyMappings) {
-        assert keyMappings != null;
+        if( keyMappings == null){
+            throw new AssertionError();
+        }
         this.mappings = keyMappings;
     }
 
     @Override
     public void keyPressed(KeyEvent event) {
-        assert event != null;
+        if( event == null){
+            throw new AssertionError();
+        }
         Action action = mappings.get(event.getKeyCode());
         if (action != null) {
             action.doAction();

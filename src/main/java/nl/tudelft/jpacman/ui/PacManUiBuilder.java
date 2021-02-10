@@ -61,7 +61,9 @@ public class PacManUiBuilder {
      * @return A new Pac-Man UI with the set keys and buttons.
      */
     public PacManUI build(final Game game) {
-        assert game != null;
+        if(game == null){
+            throw new AssertionError();
+        }
 
         if (defaultButtons) {
             addStartButton(game);
@@ -78,8 +80,9 @@ public class PacManUiBuilder {
      *            The game to stop.
      */
     private void addStopButton(final Game game) {
-        assert game != null;
-
+        if(game == null){
+            throw new AssertionError();
+        }
         buttons.put(STOP_CAPTION, game::stop);
     }
 
@@ -91,8 +94,9 @@ public class PacManUiBuilder {
      *            The game to start.
      */
     private void addStartButton(final Game game) {
-        assert game != null;
-
+        if(game == null){
+            throw new AssertionError();
+        }
         buttons.put(START_CAPTION, game::start);
     }
 
@@ -106,9 +110,10 @@ public class PacManUiBuilder {
      * @return The builder.
      */
     public PacManUiBuilder addKey(Integer keyCode, Action action) {
-        assert keyCode != null;
-        assert action != null;
 
+        if(keyCode == null||action == null){
+            throw new AssertionError();
+        }
         keyMappings.put(keyCode, action);
         return this;
     }
@@ -123,10 +128,9 @@ public class PacManUiBuilder {
      * @return The builder.
      */
     public PacManUiBuilder addButton(String caption, Action action) {
-        assert caption != null;
-        assert !caption.isEmpty();
-        assert action != null;
-
+        if(caption == null || action == null || caption.isEmpty()){
+            throw new AssertionError();
+        }
         buttons.put(caption, action);
         return this;
     }

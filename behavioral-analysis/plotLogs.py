@@ -10,8 +10,6 @@ moves = list()
 
 # read log file, line by line
 for line in open(filepath).readlines()[1:]:
-    #print line
-
     # Using regular expressions to match log lines
     groups = re.search("(.*) (.*) (.*) (.*) (.*) (.*)", line) # status, killedbyghost, currdirection, nextDirection, pellets, score
 

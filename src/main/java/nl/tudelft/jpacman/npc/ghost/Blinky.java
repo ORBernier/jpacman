@@ -59,7 +59,7 @@ public class Blinky extends Ghost {
      * @param spriteMap
      *            The sprites for this ghost.
      */
-    // TODO Blinky should speed up when there are a few pellets left, but he
+    // Blinky should speed up when there are a few pellets left, but he
     // has no way to find out how many there are.
     public Blinky(Map<Direction, Sprite> spriteMap) {
         super(spriteMap, MOVE_INTERVAL, INTERVAL_VARIATION);
@@ -80,15 +80,18 @@ public class Blinky extends Ghost {
      */
     @Override
     public Optional<Direction> nextAiMove() {
-        assert hasSquare();
-
-        // TODO Blinky should patrol his corner every once in a while
-        // TODO Implement his actual behaviour instead of simply chasing.
+        if(!hasSquare()){
+            throw new AssertionError();
+        }
+        //Blinky should patrol his corner every once in a while
+        //Implement his actual behaviour instead of simply chasing.
         Unit nearest = Navigation.findNearest(Player.class, getSquare());
         if (nearest == null) {
             return Optional.empty();
         }
-        assert nearest.hasSquare();
+        if(!nearest.hasSquare()){
+            throw new AssertionError();
+        }
         Square target = nearest.getSquare();
 
         List<Direction> path = Navigation.shortestPath(getSquare(), target, this);

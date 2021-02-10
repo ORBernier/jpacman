@@ -73,11 +73,11 @@ public class Board {
      * @return The square at the given <code>x,y</code> position (never null).
      */
     public Square squareAt(int x, int y) {
-        if(withinBorders(x, y)){
+        if(!withinBorders(x, y)){
             throw new AssertionError();
         }
         Square result = gameBoard[x][y];
-        if (result != null) {
+        if (result == null) {
             //"Follows from invariant."
             throw new AssertionError();
         }

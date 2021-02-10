@@ -88,9 +88,9 @@ public class SpriteStore {
      */
     public AnimatedSprite createAnimatedSprite(Sprite baseImage, int frames,
                                                int delay, boolean loop) {
-        assert baseImage != null;
-        assert frames > 0;
-
+        if(baseImage == null || frames <= 0){
+            throw new AssertionError();
+        }
         int frameWidth = baseImage.getWidth() / frames;
 
         Sprite[] animation = new Sprite[frames];

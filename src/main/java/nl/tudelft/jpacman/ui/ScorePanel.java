@@ -27,7 +27,7 @@ public class ScorePanel extends JPanel {
     /**
      * The map of players and the labels their scores are on.
      */
-    private final Map<Player, JLabel> scoreLabels;
+    private transient Map<Player, JLabel> scoreLabels;
 
     /**
      * The default way in which the score is shown.
@@ -38,7 +38,7 @@ public class ScorePanel extends JPanel {
     /**
      * The way to format the score information.
      */
-    private ScoreFormatter scoreFormatter = DEFAULT_SCORE_FORMATTER;
+    private transient ScoreFormatter scoreFormatter = DEFAULT_SCORE_FORMATTER;
 
     /**
      * Creates a new score panel with a column for each player.
@@ -48,8 +48,9 @@ public class ScorePanel extends JPanel {
      */
     public ScorePanel(List<Player> players) {
         super();
-        assert players != null;
-
+        if( players == null){
+            throw new AssertionError();
+        }
         setLayout(new GridLayout(2, players.size()));
 
         for (int i = 1; i <= players.size(); i++) {
@@ -96,7 +97,9 @@ public class ScorePanel extends JPanel {
      * @param scoreFormatter Score formatter to be used.
      */
     public void setScoreFormatter(ScoreFormatter scoreFormatter) {
-        assert scoreFormatter != null;
+        if( scoreFormatter == null){
+            throw new AssertionError();
+        }
         this.scoreFormatter = scoreFormatter;
     }
 }

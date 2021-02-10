@@ -38,7 +38,7 @@ class BoardPanel extends JPanel {
     /**
      * The game to display.
      */
-    private final Game game;
+    private transient Game game;
 
     /**
      * Creates a new board panel that will display the provided game.
@@ -48,7 +48,9 @@ class BoardPanel extends JPanel {
      */
     BoardPanel(Game game) {
         super();
-        assert game != null;
+        if(game == null){
+            throw new AssertionError();
+        }
         this.game = game;
 
         Board board = game.getLevel().getBoard();
@@ -63,7 +65,9 @@ class BoardPanel extends JPanel {
 
     @Override
     public void paint(Graphics g) {
-        assert g != null;
+        if(g == null){
+            throw new AssertionError();
+        }
         render(game.getLevel().getBoard(), g, getSize());
     }
 

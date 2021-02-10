@@ -92,10 +92,9 @@ public class Level {
      */
     public Level(Board board, List<Ghost> ghosts, List<Square> startPositions,
                  CollisionMap collisionMap) {
-        assert board != null;
-        assert ghosts != null;
-        assert startPositions != null;
-
+        if( board == null || ghosts == null || startPositions == null){
+            throw new AssertionError();
+        }
         this.board = board;
         this.inProgress = false;
         this.npcs = new HashMap<>();
@@ -138,9 +137,10 @@ public class Level {
      *            The player to register.
      */
     public void registerPlayer(Player player) {
-        assert player != null;
-        assert !startSquares.isEmpty();
+        if(player == null || startSquares.isEmpty()){
+            throw new AssertionError();
 
+        }
         if (players.contains(player)) {
             return;
         }
@@ -170,10 +170,9 @@ public class Level {
      *            The direction to move the unit in.
      */
     public void move(Unit unit, Direction direction) {
-        assert unit != null;
-        assert direction != null;
-        assert unit.hasSquare();
-
+        if(unit == null|| direction == null || !unit.hasSquare()){
+            throw new AssertionError();
+        }
         if (!isInProgress()) {
             return;
         }
@@ -244,7 +243,9 @@ public class Level {
     private void stopNPCs() {
         for (Entry<Ghost, ScheduledExecutorService> entry : npcs.entrySet()) {
             ScheduledExecutorService schedule = entry.getValue();
-            assert schedule != null;
+            if(schedule == null){
+                throw new AssertionError();
+            }
             schedule.shutdownNow();
         }
     }
@@ -297,7 +298,6 @@ public class Level {
      * @return The amount of pellets remaining on the board.
      */
     public int remainingPellets() {
-        Board board = getBoard();
         int pellets = 0;
         for (int x = 0; x < board.getWidth(); x++) {
             for (int y = 0; y < board.getHeight(); y++) {
@@ -308,7 +308,9 @@ public class Level {
                 }
             }
         }
-        assert pellets >= 0;
+        if(pellets < 0){
+            throw new AssertionError();
+        }
         return pellets;
     }
 
