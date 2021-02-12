@@ -18,15 +18,15 @@ public class PointCalculatorLoader {
      *
      * @return The (dynamically loaded) points calculator.
      */
-    public PointCalculator load() {
+    public static PointCalculator load() {
         try {
             if (clazz == null) {
                 clazz = loadClassFromFile();
             }
 
-            return (PointCalculator) clazz.newInstance();
+            return (PointCalculator) clazz.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
-            throw new RuntimeException("Could not dynamically load the points calculator.", e);
+            throw new ClassCastExecption("Could not dynamically load the points calculator.", e);
         }
     }
 
